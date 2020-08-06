@@ -85,27 +85,36 @@ class BurgerBuilder extends Component {
         this.setState({ showTotal: false })
     }
     purchaseContinueHandler = () => {
-        this.setState({ loading: true })
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'Alexis Ruiz',
-                address: {
-                    street: 'Sesame street',
-                    zipCode: 67189,
-                    country: 'Memexico',
-                },
-                email: 'test@test.com',
-            },
-            deliveryMethod: 'fast'
-
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
-        axios.post('/orders.json', order)
-            .then(response => {
-                this.setState({ loading: false, showTotal: false })
-            })
-            .catch(error => { this.setState({ loading: false, showTotal: false }) });
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        })
+        /*  this.setState({ loading: true })
+         const order = {
+             ingredients: this.state.ingredients,
+             price: this.state.totalPrice,
+             customer: {
+                 name: 'Alexis Ruiz',
+                 address: {
+                     street: 'Sesame street',
+                     zipCode: 67189,
+                     country: 'Memexico',
+                 },
+                 email: 'test@test.com',
+             },
+             deliveryMethod: 'fast'
+ 
+         }
+         axios.post('/orders.json', order)
+             .then(response => {
+                 this.setState({ loading: false, showTotal: false })
+             })
+             .catch(error => { this.setState({ loading: false, showTotal: false }) }); */
     }
     render() {
         const disabledInfo = { ...this.state.ingredients }
