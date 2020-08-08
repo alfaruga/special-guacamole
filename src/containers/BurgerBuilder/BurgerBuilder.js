@@ -89,32 +89,14 @@ class BurgerBuilder extends Component {
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
         }
+        //Now we need to add the price along with the ingredients, this is done
+        //right before we push the query string into the history object
+        queryParams.push('price=' + this.state.price);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
             search: '?' + queryString
         })
-        /*  this.setState({ loading: true })
-         const order = {
-             ingredients: this.state.ingredients,
-             price: this.state.totalPrice,
-             customer: {
-                 name: 'Alexis Ruiz',
-                 address: {
-                     street: 'Sesame street',
-                     zipCode: 67189,
-                     country: 'Memexico',
-                 },
-                 email: 'test@test.com',
-             },
-             deliveryMethod: 'fast'
- 
-         }
-         axios.post('/orders.json', order)
-             .then(response => {
-                 this.setState({ loading: false, showTotal: false })
-             })
-             .catch(error => { this.setState({ loading: false, showTotal: false }) }); */
     }
     render() {
         const disabledInfo = { ...this.state.ingredients }
