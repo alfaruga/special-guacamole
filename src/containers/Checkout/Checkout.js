@@ -14,7 +14,7 @@ class Checkout extends Component {
         let price = null;
         for (let param of query.entries()) {
             if (param[0] === 'price') {
-                price = param[0];
+                price = +param[1];
             } else {
                 ingredients[param[0]] = +param[1];
             }
@@ -39,7 +39,7 @@ class Checkout extends Component {
                     ingredients={this.state.ingredients} />
                 <Route
                     path={this.props.match.path + '/contact-data'}
-                    render={(props) => (<ContactData ingredients={this.state.ingredients} price={this.state.ingredients} {...props} />)} />
+                    render={(props) => (<ContactData ingredients={this.state.ingredients} price={this.state.price} {...props} />)} />
             </div>
 
         )

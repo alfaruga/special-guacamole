@@ -91,7 +91,7 @@ class BurgerBuilder extends Component {
         }
         //Now we need to add the price along with the ingredients, this is done
         //right before we push the query string into the history object
-        queryParams.push('price=' + this.state.price);
+        queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
@@ -119,12 +119,13 @@ class BurgerBuilder extends Component {
                     purchase={this.purchaseHandler} />;
 
             </Aux>)
-            orderSummary = (<OrderSummary
-                price={this.state.totalPrice}
-                ingredients={this.state.ingredients}
-                purchaseCancelled={this.purchaseCancelHandler}
-                purchaseContinues={this.purchaseContinueHandler}
-            />)
+            orderSummary = (
+                <OrderSummary
+                    price={this.state.totalPrice}
+                    ingredients={this.state.ingredients}
+                    purchaseCancelled={this.purchaseCancelHandler}
+                    purchaseContinues={this.purchaseContinueHandler}
+                />)
         };
 
         if (this.state.loading) {

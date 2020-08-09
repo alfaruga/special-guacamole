@@ -10,12 +10,7 @@
   flex-direction: column;
   align-items: center;
 }
-.Input {
-  display: block;
 
-  padding: 5px 0;
-  margin: 5px;
-}
 @media (min-width: 600px) {
   .ContactData {
     width: 500px;
